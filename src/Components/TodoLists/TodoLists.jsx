@@ -2,7 +2,7 @@ import React from 'react'
 
 const TodoLists = ({todos, handleDelete}) => {
   return (
-    <section className=''>
+    <section className='my-4'>
  <section className='grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-4 gap-x-4 gap-y-4 m-6'>
       
 {todos.map(todo => (
