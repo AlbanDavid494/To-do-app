@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { FaRegBell } from "react-icons/fa6";
+import { FaArrowDown } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
 import TodoForm from '../TodoForm/TodoForm';
 import TodoLists from '../TodoLists/TodoLists'
@@ -47,7 +48,11 @@ const handleDelete = (todoId) => {
     setTodos(todos.filter(t => t.id !== todoId))
 }
 
-
+const handleFilter = () => {
+    let newTodo = [...todos]
+    newTodo = newTodo.reverse()
+setTodos(newTodo)
+}
 
   return (
     <section className='h-screen max-h-screen bg-black lg:p-12'>
@@ -66,7 +71,7 @@ const handleDelete = (todoId) => {
         </header>
 
         {/* user name */}
-        <div className='lg:mt-9 lg:p-0 px-6'>
+        <div className='lg:mt-9 lg:p-0 ml-8'>
             <p className='text-4xl text-white font-mono'>Hello, <span className='tracking-tight font-semibold bg-gradient-to-tl from-sky-500 to-white bg-clip-text text-transparent via-emerald-500 animate-pulse'>Dear</span></p>
         </div>
 
@@ -77,14 +82,22 @@ const handleDelete = (todoId) => {
 <div className='mt-8 lg:p-0 p-8'>
 <h3 className='text-2xl font-bold'>Transform your to-do list into a roadmap to success with <i>Future Planner</i>. </h3>
 <p className=''><i>"Take control of your time and unlock your full potential. Plan, organize and achieve your goals".</i></p>
+
+<div className='flex gap-x-2'>
 <button className='flex justify-center items-center w-[120px] text-white bg-emerald-600 hover:bg-emerald-800 focus:ring-0 outline-none focus:outline-none font-medium rounded-md py-2 mt-2' onClick={handleOnClick}>create Todo <FaPlus className='ml-1 text-[14px]'  /> </button>
+
+<button className='flex justify-center items-center w-[120px] text-white bg-emerald-600 hover:bg-emerald-800 focus:ring-0 outline-none focus:outline-none font-medium rounded-md py-2 mt-2' onClick={handleFilter} >Filter <FaArrowDown className='ml-1 text-[14px]' />  </button>
+
+</div>
+
+
 </div>
 
         </section>
 
        
 {
-    isClicked ? <TodoForm title={title} description={description} handleTitleChange={handleTitleChange} handleDescriptionOnChange={handleDescriptionOnChange} handleSubmit={handleSubmit} />  : <TodoLists todos={todos} handleDelete={handleDelete} />
+    isClicked ? <TodoForm title={title} description={description} handleTitleChange={handleTitleChange} handleDescriptionOnChange={handleDescriptionOnChange} handleSubmit={handleSubmit} />  : <TodoLists todos={todos} handleDelete={handleDelete} handleFilter={handleFilter} />
 }
        
 
